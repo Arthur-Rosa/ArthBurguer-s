@@ -1,6 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 import { cartReducer } from "./Reducers";
 
+// Horas = 01:01:00
+
 // import faker from "faker";
 const Cart = createContext();
 
@@ -20,7 +22,7 @@ const Context = ({ children }) => {
     {
       id: 1,
       name: "Big Burguer",
-      price: "R$ 77,90",
+      price: "77.00",
       image: "img11",
       inStock: 3,
       fastDelivery: true,
@@ -29,7 +31,7 @@ const Context = ({ children }) => {
     {
       id: 2,
       name: "Ultra Big Burguer",
-      price: "R$ 22,90",
+      price: "22.00",
       image: "img22",
       inStock: 12,
       fastDelivery: true,
@@ -38,7 +40,7 @@ const Context = ({ children }) => {
     {
       id: 3,
       name: "Best Burguer",
-      price: "R$ 105,90",
+      price: "105.00",
       image: "img33",
       inStock: 10,
       fastDelivery: true,
@@ -47,7 +49,7 @@ const Context = ({ children }) => {
     {
       id: 4,
       name: "Mac Burguer",
-      price: "R$ 35,90",
+      price: "35.00",
       image: "img44",
       inStock: 0,
       fastDelivery: true,

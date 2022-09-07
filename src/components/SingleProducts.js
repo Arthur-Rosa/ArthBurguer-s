@@ -7,7 +7,7 @@ import Rating from "./Rating";
 const SingleProducts = ({ prod }) => {
   const {
     state: { cart },
-    dispath,
+    dispatch,
   } = CartState();
 
   return (
@@ -15,17 +15,15 @@ const SingleProducts = ({ prod }) => {
       <Card>
         {console.log(prod.image)}
 
-        <a href={`../img/${prod.image}.png`}>
           <Card.Img
             variant="top"
             src={`../img/${prod.image}.png`}
             alt={prod.name}
           ></Card.Img>
-        </a>
         <Card.Body>
           <Card.Title>{prod.name}</Card.Title>
           <Card.Subtitle style={{ paddingBottom: 10 }}>
-            <span>{prod.price.split(",")[0]}</span>
+            <span>R$ {prod.price.split(".")[0]}</span>
             {prod.fastDelivery ? (
               <div>Rápida Entrega</div>
             ) : (
@@ -34,11 +32,21 @@ const SingleProducts = ({ prod }) => {
             <Rating rating={prod.ratings} />
           </Card.Subtitle>
           {cart.some((p) => p.id === prod.id) ? (
-            <Button variant="danger">
+            <Button onClick={() => {
+              dispatch({
+                type: "REMOVE_FROM_CART",
+                payload: prod
+              })
+            }} variant="danger">
               <FaTrash color="white" fontSize="25px" />
             </Button>
           ) : (
-            <Button disabled={!prod.inStock} variant="success">
+            <Button onClick={() => {
+              dispatch({
+                type: "ADD_TO_CART",
+                payload: prod
+              })
+            }} disabled={!prod.inStock} variant="success">
               {!prod.inStock ? (
                 "Acabou :("
               ) : (
