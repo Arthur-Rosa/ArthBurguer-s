@@ -83,7 +83,11 @@ const Cart = () => {
       <div className="filters summary">
         <span className="title">Total ({cart.length}) Lanches</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>Total: R$ {total}</span>
-        <Button type="button" disabled={cart.length === 0}>
+        <Button
+          type="button"
+          disabled={cart.length === 0}
+          onClick={() => alert("Obrigado por Comprar !!!")}
+        >
           Finalizar Compra
         </Button>
       </div>

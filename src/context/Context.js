@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { cartReducer } from "./Reducers";
+import { cartReducer, productReducer } from "./Reducers";
 
 // Horas = 01:01:00
 
@@ -7,7 +7,6 @@ import { cartReducer } from "./Reducers";
 const Cart = createContext();
 
 const Context = ({ children }) => {
-
   /* const products = [...Array(20)].map(() => ({
     id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
@@ -26,7 +25,7 @@ const Context = ({ children }) => {
       image: "img11",
       inStock: 3,
       fastDelivery: true,
-      ratings: 2
+      ratings: 2,
     },
     {
       id: 2,
@@ -35,7 +34,7 @@ const Context = ({ children }) => {
       image: "img22",
       inStock: 12,
       fastDelivery: true,
-      ratings: 4
+      ratings: 4,
     },
     {
       id: 3,
@@ -44,7 +43,7 @@ const Context = ({ children }) => {
       image: "img33",
       inStock: 10,
       fastDelivery: true,
-      ratings: 5
+      ratings: 5,
     },
     {
       id: 4,
@@ -53,20 +52,31 @@ const Context = ({ children }) => {
       image: "img44",
       inStock: 0,
       fastDelivery: true,
-      ratings: 3
-    }
-  ]
-  
+      ratings: 3,
+    },
+  ];
+
   const [state, dispatch] = useReducer(cartReducer, {
     products: products,
     cart: [],
-  })
+  });
 
-  return <Cart.Provider value={{state, dispatch}}>{children}</Cart.Provider>;
+  const [productState, productDispatch] = useReducer(productReducer, {
+    byStock: false,
+    byFastDelivery: false,
+    byRating: 0,
+    searchQuery: "",
+  });
+
+  return (
+    <Cart.Provider value={{ state, dispatch, productState, productDispatch }}>
+      {children}
+    </Cart.Provider>
+  );
 };
 
 export default Context;
 
 export const CartState = () => {
   return useContext(Cart);
-}
+};

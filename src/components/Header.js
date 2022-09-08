@@ -20,7 +20,7 @@ const Header = () => {
     productDispatch,
   } = CartState();
 
-  console.log(cart)
+  console.log(cart);
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
@@ -33,6 +33,12 @@ const Header = () => {
             style={{ width: 500 }}
             placeholder="Procure o seu lanche aqui"
             className="m-auto"
+            onChange={(e) => {
+              productDispatch({
+                type: "FILTER_BY_SEARCH",
+                payload: e.target.value,
+              });
+            }}
           />
         </Navbar.Text>
         <Nav>
@@ -57,19 +63,19 @@ const Header = () => {
                         <span>{prod.name}</span>
                         <span>R$ {prod.price}</span>
                       </div>
-                      <AiFillDelete 
-                      fontSize="20px"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        dispatch({
-                          type: "REMOVE_FROM_CART",
-                          payload: prod,
-                        })
-                      }}
-                    />
+                      <AiFillDelete
+                        fontSize="20px"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          dispatch({
+                            type: "REMOVE_FROM_CART",
+                            payload: prod,
+                          });
+                        }}
+                      />
                     </span>
                   ))}
-                  <Link  to="/cart">
+                  <Link to="/cart">
                     <Button style={{ width: "95%", margin: "0 10px" }}>
                       Ir Para O Carrinho
                     </Button>
